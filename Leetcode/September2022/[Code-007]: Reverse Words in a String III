@@ -1,0 +1,21 @@
+Given a string s, reverse the order of characters in each word within a sentence while still preserving whitespace and initial word order.
+
+class Solution {
+public:
+    string reverseWords(string s) {
+        stack<char> st;
+        string res;
+        for(int i=0;i<s.size();++i){
+            if(s[i]==' '){
+                while(!st.empty()){
+                    res+=st.top();
+                    st.pop();
+                }
+                res+= s[i];
+            }
+            else st.push(s[i]);
+        }
+        while(!st.empty()) {res+= st.top(); st.pop();}
+        return res;
+    }
+};
