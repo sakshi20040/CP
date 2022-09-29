@@ -1,0 +1,52 @@
+Given the head of a linked list, remove the nth node from the end of the list and return its head.
+
+ https://leetcode.com/problems/remove-nth-node-from-end-of-list/
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    int computeLength(ListNode* node){
+        int count =0;
+        while(node!= NULL){
+            ++count;
+            node = node->next;
+        }
+        return count;
+    }
+    
+    ListNode* removeNthFromEnd(ListNode* head, int n) {
+        ListNode* temp = head;
+        int listLength = computeLength(temp);
+        //cout<<listLength;
+        if(listLength ==1 && n==1)
+            head = NULL;
+        else{
+            int delcount = listLength - n;
+            ListNode*  node= head;
+            ListNode* prevNode;
+            if(delcount ==0){
+                head = head->next;
+            }else{
+                int count = 0;
+                while(count!=delcount){
+                    prevNode = node;
+                    node = node->next;
+                    count++;
+                }
+                prevNode->next = node->next;
+            }
+            
+        }
+        return head;
+            
+    }
+};
